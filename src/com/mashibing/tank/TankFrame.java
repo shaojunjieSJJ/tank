@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class TankFrame extends Frame{
@@ -63,6 +64,11 @@ public class TankFrame extends Frame{
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).paint(g);
 		}
+		
+//		for (Iterator<Bullet> it = bullets.iterator(); it.hasNext();) {
+//			Bullet b = it.next();
+//			if (!b.live) it.remove();
+//		}
 	}
 	
 	/*
