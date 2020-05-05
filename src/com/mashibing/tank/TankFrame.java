@@ -18,9 +18,9 @@ public class TankFrame extends Frame{
 	List<Bullet> bullets = new ArrayList<>();
 	List<Tank> tanks = new ArrayList<>();
 	Bullet b = new Bullet(300, 300, Dir.DOWN, Group.GOOD, this);
+	Explode e = new Explode(100, 100, this);
+	
 	static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-	
-	
 	public TankFrame() {
 		
 		setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -79,6 +79,8 @@ public class TankFrame extends Frame{
 //			Bullet b = it.next();
 //			if (!b.live) it.remove();
 //		}
+		
+		e.paint(g);
 	}
 	
 	/*
