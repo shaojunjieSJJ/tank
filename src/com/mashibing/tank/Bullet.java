@@ -1,7 +1,5 @@
 package com.mashibing.tank;
 
-import static org.hamcrest.CoreMatchers.either;
-
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -10,6 +8,8 @@ public class Bullet {
 	private static final int SPEED = 10;
 	public static int WIDTH = ResourceMgr.bulletD.getWidth();
 	public static int HEIGHT = ResourceMgr.bulletD.getHeight();
+	
+	Rectangle rect = new Rectangle();
 	
 	private int x,y;
 	private Dir dir;
@@ -47,6 +47,13 @@ public class Bullet {
 		this.dir = dir;
 		this.group = group;
 		this.tf = tf;
+		
+		rect.x = this.x;
+		rect.y = this.y;
+		rect.width = WIDTH;
+		rect.height = HEIGHT;
+		
+			
 	}
 	
 	public void paint(Graphics g) {
@@ -89,6 +96,10 @@ public class Bullet {
 			break;
 		}
 		
+		//update rect
+		rect.x = this.x;
+		rect.y = this.y;
+		
 		if(x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;
 		
 	}
@@ -102,7 +113,7 @@ public class Bullet {
 		Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
 		Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
 		// 判断两个方块相交
-		if (rect1.intersects(rect2)) {
+		if (rect.intersects(tank.rect)) {
 			tank.die();
 			this.die();
 			int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
