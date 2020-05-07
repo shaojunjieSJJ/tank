@@ -7,6 +7,16 @@ import javax.imageio.ImageIO;
 
 public class ResourceMgr {
 
+	public static final ResourceMgr resourceMgr = new ResourceMgr();
+	
+	private ResourceMgr() {
+		
+	}
+	
+	public static ResourceMgr getInstence() {
+		return resourceMgr;
+	}
+	
 	public static BufferedImage goodTankL, goodTankU, goodTankR, goodTankD;
 	public static BufferedImage badTankL, badTankU, badTankR, badTankD;
 	public static BufferedImage bulletL, bulletU, bulletR, bulletD;

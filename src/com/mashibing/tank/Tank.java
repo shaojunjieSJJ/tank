@@ -5,19 +5,19 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 public class Tank {
-	private int x, y;
-	private Dir dir = Dir.DOWN;
+	int x, y;
+	Dir dir = Dir.DOWN;
 	private static final int SPEED = 5;
 	
 	public static int WIDTH = ResourceMgr.goodTankU.getWidth();
 	public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
 	// 控制敌方坦克是否动
 	private boolean moving = true;
-	private Group group = Group.BAD;
+	Group group = Group.BAD;
 	private Random random = new Random();
 	
 	Rectangle rect = new Rectangle();
-	
+	FireStrategy fs;
 	
 	public Group getGroup() {
 		return group;
@@ -25,7 +25,7 @@ public class Tank {
 	public void setGroup(Group group) {
 		this.group = group;
 	}
-	private TankFrame tf = null;
+	TankFrame tf = null;
 	private boolean living = true;
 	
 	public Tank() {
@@ -44,6 +44,18 @@ public class Tank {
 		rect.width = WIDTH;
 		rect.height = HEIGHT;
 		
+		if (group == Group.GOOD) {
+			
+			String goodFSName = (String)PropertyMgr.get("goodFS");
+			
+			try {
+				fs = (FireStrategy)Class.forName(goodFSName).newInstance();
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		} else {
+			fs = new DefaultFireStrategy();
+		}
 	}
 
 	public int getX() {
@@ -141,10 +153,7 @@ public class Tank {
 	}
 	
 	public void fire() {
-		int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-		int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-		
-		tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
+		fs.fire(this);
 	}
 	public void die() {
 		this.living = false;

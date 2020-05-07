@@ -5,8 +5,11 @@ import java.util.Properties;
 
 public class PropertyMgr {
 	
-	static Properties props = new Properties(); 
+	public static final Properties props = new Properties(); 
 	
+	private PropertyMgr() {
+		
+	}
 	static {
 		try {
 			props.load(PropertyMgr.class.getClassLoader().getResourceAsStream("config"));
@@ -31,7 +34,4 @@ public class PropertyMgr {
 		return (String)props.get(key);
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(PropertyMgr.get("initTankCount"));
-	}
 }
