@@ -9,18 +9,26 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import com.mashibing.tank.abstractfactory.BaseBullet;
+import com.mashibing.tank.abstractfactory.BaseExplode;
+import com.mashibing.tank.abstractfactory.BaseTank;
+import com.mashibing.tank.abstractfactory.DefaultFactory;
+import com.mashibing.tank.abstractfactory.GameFactory;
+import com.mashibing.tank.abstractfactory.RectFactory;
 
 public class TankFrame extends Frame{
 	
-	Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
-	List<Bullet> bullets = new ArrayList<>();
-	List<Tank> tanks = new ArrayList<>();
-	Bullet b = new Bullet(300, 300, Dir.DOWN, Group.GOOD, this);
-	List<Explode> explodes  = new ArrayList<>();
+	public Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
+	public List<BaseBullet> bullets = new ArrayList<>();
+	public List<BaseTank> tanks = new ArrayList<>();
+	public Bullet b = new Bullet(300, 300, Dir.DOWN, Group.GOOD, this);
+	public List<BaseExplode> explodes  = new ArrayList<>();
 	
-	static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+	public GameFactory gf = new DefaultFactory();
+	
+	public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 	public TankFrame() {
 		
 		setSize(GAME_WIDTH, GAME_HEIGHT);

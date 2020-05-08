@@ -10,7 +10,7 @@ public class Main {
 		
 		//初始化地方坦克
 		for (int i = 0; i < initTankCount; i++) {
-			f.tanks.add(new Tank(50 + i*80, 200, Dir.DOWN, Group.BAD, f));
+			f.tanks.add(f.gf.createTank(50 + i*80, 200, Dir.DOWN, Group.BAD, f));
 		}
 		
 		new Thread(() -> new Audio("audio/war1.wav").play()).start();
